@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>廿年 (2017)</title>
+</head>
+<style type="text/css">
+#playlist,audio{background:#666;width:400px;padding:20px;}
+.active a{color:#5DB0E6;text-decoration:none;}
+li a{color:#eeeedd;background:#333;padding:5px;display:block;}
+li a:hover{text-decoration:none;}
+</style>
+<body>
+    <audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg">
+        <source type="audio/mp3" src="http://rthk9.rthk.hk/radiodrama/media/20yrs_story01.mp3">
+        Sorry, your browser does not support HTML5 audio.
+    </audio>
+    <ul id="playlist">
+<li class="active"><a href="http://rthk9.rthk.hk/radiodrama/media/20yrs_story01.mp3">第1集 《一指流沙》</a></li>
+<li><a href="http://rthk9.rthk.hk/radiodrama/media/20yrs_story02.mp3">第2集《焗「住」》</a></li>
+<li><a href="http://rthk9.rthk.hk/radiodrama/media/20yrs_story03.mp3">第3集《有生之年》</a></li>
+<li><a href="http://rthk9.rthk.hk/radiodrama/media/20yrs_story04.mp3">第4集《情人島》</a></li>
+<li><a href="http://rthk9.rthk.hk/radiodrama/media/20yrs_story05.mp3">第5集《孤單星球》</a></li>
+<li><a href="http://rthk9.rthk.hk/radiodrama/media/20yrs_story06.mp3">第6集《盡在「不言」中》</a></li>
+<li><a href="http://rthk9.rthk.hk/radiodrama/media/20yrs_story07.mp3">第7集《不能不說的秘密》</a></li>
+<li><a href="http://rthk9.rthk.hk/radiodrama/media/20yrs_story08.mp3">第8集《回流》</a></li>
+<li><a href="http://rthk9.rthk.hk/radiodrama/media/20yrs_story09.mp3">第9集《我像那銀河星星》</a></li>
+<li><a href="http://rthk9.rthk.hk/radiodrama/media/20yrs_story10.mp3">第10集《那年的集體眼淚》</a></li>
+    </ul>
+</body>
+<script type="text/javascript">
+var audio;
+var playlist;
+var tracks;
+var current;
+if (document.readyState !== 'loading' ) {
+  eventHandler();
+} else {
+  document.addEventListener( 'DOMContentLoaded', eventHandler);  
+}  
+function eventHandler(){
+
+init();
+function init(){
+    audio = document.getElementById('audio');
+    playlist = document.getElementById('playlist');
+    current = playlist.firstElementChild;
+    tracks = playlist.querySelectorAll('a');
+    audio.volume = .10;
+    audio.play();
+    for (var link of tracks) {
+        link.addEventListener('click', function(e){ 
+        e.preventDefault();
+        var link = this;
+        current.classList.remove('active');
+        current = link.parentNode;
+        current.classList.add('active');
+        run(link, audio);
+        });
+    }
+    audio.addEventListener('ended',function(e){
+        current.classList.remove('active');
+        current= current.nextElementSibling;
+        if(current == null){
+            current = playlist.firstElementChild;
+        }
+        current.classList.add('active');
+        link = current.firstElementChild;
+        run(link,audio);
+    });
+}
+function run(link, player){
+        player.src = link.href;
+        audio.load();
+        audio.play();
+}
+}	
+</script>
+
+</html>

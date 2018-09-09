@@ -1,0 +1,6 @@
+#!/bin/bash
+for i in {1..15}
+do
+   NBR=$(printf '%02d' $i)	
+   echo "<div><a href=\"http://rthk9.rthk.hk/radiodrama/mp3/7fwriters/yishu_golden$NBR.mp3\">$i</a></div>"
+   done

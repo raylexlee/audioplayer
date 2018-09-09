@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>天外金球</title>
+<style>
+p , pre  {font-size: 20px;}    
+#audio{background:#666;width:94%;padding:20px;}
+.active a{color:#5DB0E6;text-dcoration:none;}
+div a{color:black;}
+div a:hover{text-decoration:none;}
+#playlist {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  background-color: green;
+  padding: 3px;
+}
+#playlist > div  {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid black;
+  padding: 4px;
+  text-align: center;
+  font-size: 20px;
+}
+</style>
+</head>
+<body>
+    <audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg">
+        <source type="audio/mp3" src="http://rthk9.rthk.hk/radiodrama/mp3/11wesley/wesley_spaceball01.mp3">
+        Sorry, your browser does not support HTML5 audio.
+    </audio>
+<div id="playlist">
+<div class="active"><a href="http://rthk9.rthk.hk/radiodrama/mp3/11wesley/wesley_spaceball01.mp3">1</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/11wesley/wesley_spaceball02.mp3">2</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/11wesley/wesley_spaceball03.mp3">3</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/11wesley/wesley_spaceball04.mp3">4</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/11wesley/wesley_spaceball05.mp3">5</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/11wesley/wesley_spaceball06.mp3">6</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/11wesley/wesley_spaceball07.mp3">7</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/11wesley/wesley_spaceball08.mp3">8</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/11wesley/wesley_spaceball09.mp3">9</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/11wesley/wesley_spaceball10.mp3">10</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/11wesley/wesley_spaceball11.mp3">11</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/11wesley/wesley_spaceball12.mp3">12</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/11wesley/wesley_spaceball13.mp3">13</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/11wesley/wesley_spaceball14.mp3">14</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/11wesley/wesley_spaceball15.mp3">15</a></div>
+</div>
+<p>「天外金球」是早期的衛斯理故事，寫在1966年。白素接受了一個委託，往西藏尋找一顆「金球」寶物，卻因此發現了令人無法理解的秘密。
+監製：李安求 　編導：梁繼璋
+演出：李學斌（衛斯理）；車森梅（白素）；曾永強（白老大）</p>
+<pre>
+</pre>
+</body>
+<script type="text/javascript">
+var audio;
+var playlist;
+var tracks;
+var current;
+if (document.readyState !== 'loading' ) {
+  eventHandler();
+} else {
+  document.addEventListener( 'DOMContentLoaded', eventHandler);  
+}  
+function eventHandler(){
+
+init();
+function init(){
+    audio = document.getElementById('audio');
+    playlist = document.getElementById('playlist');
+    current = playlist.firstElementChild;
+    tracks = playlist.querySelectorAll('a');
+    audio.volume = .10;
+    audio.play();
+    for (var link of tracks) {
+        link.addEventListener('click', function(e){ 
+        e.preventDefault();
+        var link = this;
+        current.classList.remove('active');
+        current = link.parentNode;
+        current.classList.add('active');
+        run(link, audio);
+        });
+    }
+    audio.addEventListener('ended',function(e){
+        current.classList.remove('active');
+        current= current.nextElementSibling;
+        if(current == null){
+            current = playlist.firstElementChild;
+        }
+        current.classList.add('active');
+        link = current.firstElementChild;
+        run(link,audio);
+    });
+}
+function run(link, player){
+        player.src = link.href;
+        audio.load();
+        audio.play();
+}
+}	
+</script>
+</html>

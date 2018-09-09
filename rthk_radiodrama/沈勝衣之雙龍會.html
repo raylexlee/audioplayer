@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>沈勝衣之雙龍會</title>
+<style>
+p , pre  {font-size: 20px;}    
+#audio{background:#666;width:94%;padding:20px;}
+.active a{color:#5DB0E6;text-dcoration:none;}
+div a{color:black;}
+div a:hover{text-decoration:none;}
+#playlist {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  background-color: green;
+  padding: 3px;
+}
+#playlist > div  {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid black;
+  padding: 4px;
+  text-align: center;
+  font-size: 20px;
+}
+</style>
+</head>
+<body>
+    <audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg">
+        <source type="audio/mp3" src="http://rthk9.rthk.hk/radiodrama/mp3/4tales/rd_dragon_1.mp3">
+        Sorry, your browser does not support HTML5 audio.
+    </audio>
+<div id="playlist">
+<div class="active"><a href="http://rthk9.rthk.hk/radiodrama/mp3/4tales/rd_dragon_1.mp3">1</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/4tales/rd_dragon_2.mp3">2</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/4tales/rd_dragon_3.mp3">3</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/4tales/rd_dragon_4.mp3">4</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/4tales/rd_dragon_5.mp3">5</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/4tales/rd_dragon_6.mp3">6</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/4tales/rd_dragon_7.mp3">7</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/4tales/rd_dragon_8.mp3">8</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/4tales/rd_dragon_9.mp3">9</a></div>
+</div>
+<p>二十年前神秘組織珠光寶氣閣被劫，以慣匪魯大軍、溫良玉及楊文廣嫌疑最大。沈勝衣協助查捕頭追查，證實魯大軍和溫良玉都不曾涉案，而楊文廣則已消聲匿跡近十年，一時不知從何入手。同時，消失多年的蜘蛛柬重現江湖。由於當年每個收到蜘蛛柬的人都會被殺，這次收柬的五人不得不急謀對策。到底這兩件事有什麼關聯？二十年的懸案又會如何了結呢？</p>
+<pre>
+演員表
+編導：何楚雲 編劇：楊 敏 原著：黃 鷹
+主題曲：主唱：羅文
+李學斌  飾  沈勝衣
+溫  泉  飾  魯大軍
+劉安東  飾  王少川
+莫家駒  飾  查捕頭
+丁  茵  飾  夏  母
+姚秀鈴  飾  夏容容
+黃浩義  飾  鄧玉書
+曾永強  飾  蕭克安
+譚翠蓮  飾  賽觀音
+陳永亮  飾  傅東山
+車森梅  飾  小  桃
+林友榮  飾  溫良玉 / 張  垣
+陳炳球  飾  亞  忠 / 李  廣
+勞韻妍  飾  方大媽 / 小  香
+</pre>
+</body>
+<script type="text/javascript">
+var audio;
+var playlist;
+var tracks;
+var current;
+if (document.readyState !== 'loading' ) {
+  eventHandler();
+} else {
+  document.addEventListener( 'DOMContentLoaded', eventHandler);  
+}  
+function eventHandler(){
+
+init();
+function init(){
+    audio = document.getElementById('audio');
+    playlist = document.getElementById('playlist');
+    current = playlist.firstElementChild;
+    tracks = playlist.querySelectorAll('a');
+    audio.volume = .10;
+    audio.play();
+    for (var link of tracks) {
+        link.addEventListener('click', function(e){ 
+        e.preventDefault();
+        var link = this;
+        current.classList.remove('active');
+        current = link.parentNode;
+        current.classList.add('active');
+        run(link, audio);
+        });
+    }
+    audio.addEventListener('ended',function(e){
+        current.classList.remove('active');
+        current= current.nextElementSibling;
+        if(current == null){
+            current = playlist.firstElementChild;
+        }
+        current.classList.add('active');
+        link = current.firstElementChild;
+        run(link,audio);
+    });
+}
+function run(link, player){
+        player.src = link.href;
+        audio.load();
+        audio.play();
+}
+}	
+</script>
+</html>

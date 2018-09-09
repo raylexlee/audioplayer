@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>陌上歸人</title>
+<style>
+p {font-size: 20px;}    
+#audio{background:#666;width:94%;padding:20px;}
+.active a{color:#5DB0E6;text-dcoration:none;}
+div a{color:black;}
+div a:hover{text-decoration:none;}
+#playlist {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  background-color: green;
+  padding: 3px;
+}
+#playlist > div  {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid black;
+  padding: 4px;
+  text-align: center;
+  font-size: 20px;
+}
+</style>
+</head>
+<body>
+    <audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg">
+        <source type="audio/mp3" src="http://rthk9.rthk.hk/radiodrama/mp3/7fwriters/rd_return_1.mp3">
+        Sorry, your browser does not support HTML5 audio.
+    </audio>
+<div id="playlist">
+<div class="active"><a href="http://rthk9.rthk.hk/radiodrama/mp3/7fwriters/rd_return_1.mp3">1</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/7fwriters/rd_return_2.mp3">2</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/7fwriters/rd_return_3.mp3">3</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/7fwriters/rd_return_4.mp3">4</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/7fwriters/rd_return_5.mp3">5</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/7fwriters/rd_return_6.mp3">6</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/7fwriters/rd_return_7.mp3">7</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/7fwriters/rd_return_8.mp3">8</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/7fwriters/rd_return_9.mp3">9</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/7fwriters/rd_return_10.mp3">10</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/7fwriters/rd_return_11.mp3">11</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/7fwriters/rd_return_12.mp3">12</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/7fwriters/rd_return_13.mp3">13</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/7fwriters/rd_return_14.mp3">14</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/7fwriters/rd_return_15.mp3">15</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/7fwriters/rd_return_16.mp3">16</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/7fwriters/rd_return_17.mp3">17</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/7fwriters/rd_return_18.mp3">18</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/7fwriters/rd_return_19.mp3">19</a></div>
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/7fwriters/rd_return_20.mp3">20</a></div>
+</div>
+<p>《悲歡離合》系列是當年第一台及第二台聯播的廣播劇。每個單元都有一首主題曲配合，例如由區瑞強主唱的《陌上歸人》、陳秋霞主唱的《夜溫柔》、張國榮主唱的《雲上雲上》，及張德蘭主唱的《茫茫路》、《午夜結他》等。《陌上歸人》講述一個四角戀愛的故事。演員包括朱曼子、倪秉郎等，於1977年至1991年間播出。監製：吳錫輝。   嚴沁小說系列</p>
+</body>
+<script type="text/javascript">
+var audio;
+var playlist;
+var tracks;
+var current;
+if (document.readyState !== 'loading' ) {
+  eventHandler();
+} else {
+  document.addEventListener( 'DOMContentLoaded', eventHandler);  
+}  
+function eventHandler(){
+
+init();
+function init(){
+    audio = document.getElementById('audio');
+    playlist = document.getElementById('playlist');
+    current = playlist.firstElementChild;
+    tracks = playlist.querySelectorAll('a');
+    audio.volume = .10;
+    audio.play();
+    for (var link of tracks) {
+        link.addEventListener('click', function(e){ 
+        e.preventDefault();
+        var link = this;
+        current.classList.remove('active');
+        current = link.parentNode;
+        current.classList.add('active');
+        run(link, audio);
+        });
+    }
+    audio.addEventListener('ended',function(e){
+        current.classList.remove('active');
+        current= current.nextElementSibling;
+        if(current == null){
+            current = playlist.firstElementChild;
+        }
+        current.classList.add('active');
+        link = current.firstElementChild;
+        run(link,audio);
+    });
+}
+function run(link, player){
+        player.src = link.href;
+        audio.load();
+        audio.play();
+}
+}	
+</script>
+</html>

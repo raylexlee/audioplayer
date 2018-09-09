@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>連城訣</title>
+<style>
+p {font-size: 20px;}    
+#audio{background:#666;width:94%;padding:20px;}
+.active a{color:#5DB0E6;text-dcoration:none;}
+div a{color:black;}
+div a:hover{text-decoration:none;}
+#playlist {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  background-color: green;
+  padding: 3px;
+}
+#playlist > div  {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+  font-size: 20px;
+}
+</style>
+</head>
+<body>
+    <audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg">
+        <source type="audio/mp3" src="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022a.mp3">
+        Sorry, your browser does not support HTML5 audio.
+    </audio>
+<div id="playlist">
+<div class="active"><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022a.mp3">a</a></div> 
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022b.mp3">b</a></div> 
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022c.mp3">c</a></div> 
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022d.mp3">d</a></div> 
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022e.mp3">e</a></div> 
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022f.mp3">f</a></div> 
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022g.mp3">g</a></div> 
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022h.mp3">h</a></div> 
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022i.mp3">i</a></div> 
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022j.mp3">j</a></div> 
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022k.mp3">k</a></div> 
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022l.mp3">l</a></div> 
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022m.mp3">m</a></div> 
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022n.mp3">n</a></div> 
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022o.mp3">o</a></div> 
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022p.mp3">p</a></div> 
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022q.mp3">q</a></div> 
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022r.mp3">r</a></div> 
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022s.mp3">s</a></div> 
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022t.mp3">t</a></div> 
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022u.mp3">u</a></div> 
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022v.mp3">v</a></div> 
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022w.mp3">w</a></div> 
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022x.mp3">x</a></div> 
+<div><a href="http://rthk9.rthk.hk/radiodrama/mp3/5martial/80s_0022y.mp3">y</a></div>     
+</div>
+<p>「連城訣」是香港電台第一齣改編自金庸武俠小說的廣播劇，講述江湖上爾虞我詐、借刀殺人、貓哭老鼠等人性醜惡的一面。整齣廣播劇情節豐富，圈套中見圈套、陰謀中又有陰謀，引人入勝。主要演員有李學斌、楊麗仙。主題曲「連城訣」由鄭少秋主唱，顧家輝作曲，盧國沾填詞。</p>
+</body>
+<script type="text/javascript">
+var audio;
+var playlist;
+var tracks;
+var current;
+if (document.readyState !== 'loading' ) {
+  eventHandler();
+} else {
+  document.addEventListener( 'DOMContentLoaded', eventHandler);  
+}  
+function eventHandler(){
+
+init();
+function init(){
+    audio = document.getElementById('audio');
+    playlist = document.getElementById('playlist');
+    current = playlist.firstElementChild;
+    tracks = playlist.querySelectorAll('a');
+    audio.volume = .10;
+    audio.play();
+    for (var link of tracks) {
+        link.addEventListener('click', function(e){ 
+        e.preventDefault();
+        var link = this;
+        current.classList.remove('active');
+        current = link.parentNode;
+        current.classList.add('active');
+        run(link, audio);
+        });
+    }
+    audio.addEventListener('ended',function(e){
+        current.classList.remove('active');
+        current= current.nextElementSibling;
+        if(current == null){
+            current = playlist.firstElementChild;
+        }
+        current.classList.add('active');
+        link = current.firstElementChild;
+        run(link,audio);
+    });
+}
+function run(link, player){
+        player.src = link.href;
+        audio.load();
+        audio.play();
+}
+}	
+</script>
+</html>
