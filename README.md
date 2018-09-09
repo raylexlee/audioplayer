@@ -100,3 +100,11 @@ Here is the screenshot when the end-product [brothersister.html](brothersister.h
 ___
 This [AudioPlayer Template](indexTemplate.html) is able to accommodate a playlist of 100 episode Cantonese radio drama [Mount Deer](rthk_radiodrama/鹿鼎記.html) adapted from the [original](http://rthk9.rthk.hk/radiodrama/5martial/mountdeer.htm) of [RTHK Hong Kong](http://www.rthk.hk/?lang=en). 
 ![Markdown Logo](screenshot/mountaindeer.jpeg)
+---
+___
+## Acknowlegement:
+1. [HTML5 Audio with playlists - JSFiddle](http://jsfiddle.net/lastrose/vkMqR/?utm_source=website&utm_medium=embed&utm_campaign=vkMqR)
+1. [You Don't Need Jquery](https://github.com/nefe/You-Dont-Need-jQuery)
+1. [CSS Grid Layout](https://www.w3schools.com/css/css_grid_container.asp)
+1. [Markdown Crash Course](https://www.youtube.com/watch?v=HUBNt18RFbo) from the youtube channel [Traversy Media](https://www.youtube.com/channel/UC29ju8bIPH5as8OGnQzwJyA)
+1. [Classical Radio Drama](http://rthk9.rthk.hk/radiodrama/) of [RTHK.HK](http://www.rthk.hk/)
