@@ -91,3 +91,12 @@ function run(link, player){
 }
 }	
 ```
+---
+___
+
+Here is the screenshot when the end-product [brothersister.html](brothersister.html) is whatsapped and run in an iPhone :
+![Markdown Logo](screenshot/brothersister.jpeg)
+---
+___
+This [AudioPlayer Template](indexTemplate.html) is able to accommodate a playlist of 100 episode Cantonese radio drama [Mount Deer](rthk_radiodrama/鹿鼎記.html) adapted from the [original](http://rthk9.rthk.hk/radiodrama/5martial/mountdeer.htm) of [RTHK Hong Kong](http://www.rthk.hk/?lang=en). 
+![Markdown Logo](screenshot/mountaindeer.jpeg)
