@@ -1,5 +1,12 @@
 # audioplayer
-To demonstrate the usage of the AudioPlayer, a playlist is taken from [Song Birds by Radio 4 Hong Kong](http://rthk9.rthk.hk/radiodrama/12songbirds/songbirds.htm) as an example.
+## Background
+[Radio Television Hong Kong (RTHK; Chinese: 香港電台)](https://en.wikipedia.org/wiki/RTHK) presents an online collection of radio dramas from 1960 up to present time in http://rthk9.rthk.hk/radiodrama/ . Each drama is a series of episodes. I wish to enhance the user and sharing experience in listening to these wonderful and enjoyable masterpieces to have the following features:
+1. mobile first, responsive
+1. autoplay from any episode
+1. single page with vanilla css and javascript
+
+## Usage
+To demonstrate the usage of the AudioPlayer Template, a playlist is taken from [Song Birds by Radio 4 Hong Kong](http://rthk9.rthk.hk/radiodrama/12songbirds/songbirds.htm) as an example.
 
 AudioPlayer is a mobile first responsive single html5 page with the following features :
 * auto play a playlist of audio files or urls from any selected sequel.
@@ -42,7 +49,7 @@ div a:hover{text-decoration:none;}
 }
 </style>
 ```
-To implement the autoplay from any sequel, we need the following vanilla javascript
+To implement the autoplay from any episode, we need the following vanilla javascript
 ```javascript
 var audio;
 var playlist;
@@ -95,10 +102,12 @@ function run(link, player){
 ___
 
 Here is the screenshot when the end-product [brothersister.html](brothersister.html) is whatsapped and run in an iPhone :
+
 ![Markdown Logo](screenshot/brothersister.jpeg)
 ---
 ___
 This [AudioPlayer Template](indexTemplate.html) is able to accommodate a playlist of 100 episode Cantonese radio drama [Mount Deer](rthk_radiodrama/鹿鼎記.html) adapted from the [original](http://rthk9.rthk.hk/radiodrama/5martial/mountdeer.htm) of [RTHK Hong Kong](http://www.rthk.hk/?lang=en). 
+
 ![Markdown Logo](screenshot/mountaindeer.jpeg)
 ---
 ___
