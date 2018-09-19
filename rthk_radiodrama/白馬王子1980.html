@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>白馬王子1980</title>
+<style>
+p , pre  {font-size: 20px;}    
+#audio{background:#666;width:94%;padding:20px;}
+.active a{color:#5DB0E6;text-dcoration:none;}
+div a{color:black;}
+div a:hover{text-decoration:none;}
+#playlist {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  background-color: green;
+  padding: 3px;
+}
+#playlist > div  {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid black;
+  padding: 4px;
+  text-align: center;
+  font-size: 20px;
+}
+</style>
+</head>
+<body>
+    <audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg">
+        <source type="audio/mp3" src="">
+        Sorry, your browser does not support HTML5 audio.
+    </audio>
+<div id="playlist">
+</div>
+<p>香港某大學男生狄雅各、潘偉烈、杜海澄、李西敏都長得英俊瀟灑，是校內有名的「白馬王子」。廣播劇「白馬王子」描述的，就是他們各自曲折離奇的戀愛故事。此廣播劇的同名主題曲「白馬王子」由黎小田作曲，鄭國江填詞，蔡楓華主唱。</p>
+<pre>
+原著: 岑凱倫　　
+監製: 李安求　　
+改編: 楊婉媚
+演員表： 	
+李學斌 飾 狄雅各 	
+劉安東 飾 潘偉烈 	
+傅菁華 飾 杜海澄 	
+倪秉郎 飾 李西敏 	
+姚秀鈴 飾 月媚 	
+車森梅 飾 狄雅莉
+楊麗仙 飾 高依芙 
+陳炳球 飾 麥永連 	
+朱曼子 飾 胡艾飛 	
+林友榮 飾 李伯祥 	
+何錦華 飾 周美芝 	
+譚翠蓮 飾 珍姐
+  丁茵 飾 狄母 	
+  溫泉 飾 胡父 	
+陳婉紅 飾 阿文 
+陳永亮 飾 大偉
+</pre>
+</body>
+<script type="text/javascript">
+var audio;
+var playlist;
+var tracks;
+var current;
+if (document.readyState !== 'loading' ) {
+  eventHandler();
+} else {
+  document.addEventListener( 'DOMContentLoaded', eventHandler);  
+}  
+function eventHandler(){
+init();
+function init(){
+    audio = document.getElementById('audio');
+    playlist = document.getElementById('playlist');
+    FillPlaylist("7fwriters/princecharming/",25, 2);	
+    current = playlist.firstElementChild;
+    tracks = playlist.querySelectorAll('a');
+    audio.volume = .10;
+    audio.play();
+    for (var link of tracks) {
+        link.addEventListener('click', function(e){ 
+        e.preventDefault();
+        var link = this;
+        current.classList.remove('active');
+        current = link.parentNode;
+        current.classList.add('active');
+        run(link, audio);
+        });
+    }
+    audio.addEventListener('ended',function(e){
+        current.classList.remove('active');
+        current= current.nextElementSibling;
+        if(current == null){
+            current = playlist.firstElementChild;
+        }
+        current.classList.add('active');
+        link = current.firstElementChild;
+        run(link,audio);
+    });
+}
+function run(link, player){
+        player.src = link.href;
+        audio.load();
+        audio.play();
+}
+function FillPlaylist(drama, len, pad) {
+    var i;
+    for (i=1; i<=len; i++) { 	
+       var div_ = document.createElement("DIV");
+       var a_ = document.createElement("A");
+       var episode = i.toString();	    
+       if (pad > 0) {
+	  episode = episode.padStart(pad, '0');
+       }       
+       a_.setAttribute("href", "http://rthk9.rthk.hk/radiodrama/mp3/"+ drama + episode + ".mp3");
+       var i_ = document.createTextNode(i.toString());
+       a_.appendChild(i_);
+       div_.appendChild(a_);
+       if (i == 1) {
+	  div_.setAttribute("class","active");     
+	  audio.firstElementChild.setAttribute("src", a_.attributes[0].value);     
+	  audio.load();     
+       }	       
+       playlist.appendChild(div_);
+    }	    
+}
+}	
+</script>
+</html>
