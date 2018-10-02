@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>喪屍山莊1983</title>
+<style>
+p , pre  {font-size: 20px;}    
+#audio{background:#666;width:94%;padding:20px;}
+.active a{color:#5DB0E6;text-dcoration:none;}
+div a{color:black;}
+div a:hover{text-decoration:none;}
+#playlist {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  background-color: green;
+  padding: 3px;
+}
+#playlist > div  {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid black;
+  padding: 4px;
+  text-align: center;
+  font-size: 20px;
+}
+</style>
+</head>
+<body>
+    <audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg">
+        <source type="audio/mp3" src="">
+        Sorry, your browser does not support HTML5 audio.
+    </audio>
+<div id="playlist">
+</div>
+<p>著名的克里賓博士訪港，警員奉命嚴密保護。一晚，兩名警員發現一個可疑人物試圖靠近博士的別墅，正想上前調查，一陣中人欲嘔的惡臭襲人而來，槍戰隨即展開，卻發現神秘人竟然刀槍不入，最後更將博士殺死。神秘人最後也爆炸身亡。警方在泳池拾到其頭顱，化驗後竟發現屬於一個已死去多時的人。奇俠司馬洛奉命展開調查……
+</p>
+<pre>
+演員表
+編導：李學斌  
+監製：李安求  
+原著：馮嘉
+蔡雅各  飾  司馬洛
+姚秀鈴  飾  紫  蘭
+李學斌  飾  克里賓博士  
+謤翠蓮  飾  區碧玉
+傅菁葦  飾  高 華
+陳炳球  飾  探長 
+         / 保鏢
+葉世雄  飾  探員
+梁繼璋  飾  探員
+曾永強  飾  警員 
+         / 莫先生
+朱曼子  飾  警員
+車森梅  飾  伊美達
+林友榮  飾  方素 
+         / 軍火專家
+莫家駒  飾  亞炳 
+         / 熊貓
+區永漢  飾  警員
+          /田子明
+          /羅米路
+          /魯亦文
+          /機師
+          /手下
+勞韻妍  飾  司徒美子 
+         / 護士   
+何錦華  飾  史丹妮絲
+楊麗仙  飾  莎莉 
+         / 梁霞
+莫家駒 簡偉安  飾  
+喪屍 / 保鏢
+簡偉安  飾  探員 
+         / 安迪 
+         / 專家 
+         / 保鏢 
+         / 手下
+溫　泉  飾  探員 
+         / 歹徒 
+         / 葛烈勞
+</pre>
+</body>
+<script type="text/javascript">
+var audio;
+var playlist;
+var tracks;
+var current;
+if (document.readyState !== 'loading' ) {
+  eventHandler();
+} else {
+  document.addEventListener( 'DOMContentLoaded', eventHandler);  
+}  
+function eventHandler(){
+
+init();
+function init(){
+    audio = document.getElementById('audio');
+    playlist = document.getElementById('playlist');
+    FillPlaylist("8detective/rd_zombie_",15, 0);	
+    current = playlist.firstElementChild;
+    tracks = playlist.querySelectorAll('a');
+    audio.volume = .10;
+    audio.play();
+    for (var link of tracks) {
+        link.addEventListener('click', function(e){ 
+        e.preventDefault();
+        var link = this;
+        current.classList.remove('active');
+        current = link.parentNode;
+        current.classList.add('active');
+        run(link, audio);
+        });
+    }
+    audio.addEventListener('ended',function(e){
+        current.classList.remove('active');
+        current= current.nextElementSibling;
+        if(current == null){
+            current = playlist.firstElementChild;
+        }
+        current.classList.add('active');
+        link = current.firstElementChild;
+        run(link,audio);
+    });
+}
+function run(link, player){
+        player.src = link.href;
+        audio.load();
+        audio.play();
+}
+function FillPlaylist(drama, len, pad) {
+    var i;
+    for (i=1; i<=len; i++) { 	
+       var div_ = document.createElement("DIV");
+       var a_ = document.createElement("A");
+       var episode = i.toString();	    
+       if (pad > 0) {
+	  episode = episode.padStart(pad, '0');
+       }       
+       a_.setAttribute("href", "http://rthk9.rthk.hk/radiodrama/mp3/"+ drama + episode + ".mp3");
+       var i_ = document.createTextNode(i.toString());
+       a_.appendChild(i_);
+       div_.appendChild(a_);
+       if (i == 1) {
+	  div_.setAttribute("class","active");     
+	  audio.firstElementChild.setAttribute("src", a_.attributes[0].value);     
+	  audio.load();     
+       }	       
+       playlist.appendChild(div_);
+    }	    
+}
+}	
+</script>
+</html>
