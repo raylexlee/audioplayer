@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>紅玫瑰與白玫瑰</title>
+<style>
+p , pre  {font-size: 20px;}    
+#audio{background:#666;width:94%;padding:20px;}
+.active a{color:#5DB0E6;text-dcoration:none;}
+div a{color:black;}
+div a:hover{text-decoration:none;}
+#playlist {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  background-color: green;
+  padding: 3px;
+}
+#playlist > div  {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid black;
+  padding: 4px;
+  text-align: center;
+  font-size: 20px;
+}
+</style>
+</head>
+<body>
+    <audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg">
+        <source type="audio/mp3" src="">
+        Sorry, your browser does not support HTML5 audio.
+    </audio>
+<div id="playlist">
+</div>
+<p>振保的生命裡有兩個女人，他說一個是他的白玫瑰，一個是他的紅玫瑰；一個是聖潔的妻子，一個是熱烈的情婦…
+</p>
+<pre>
+張愛玲小說系列
+編導：曾月娥　　
+編劇：陳七　　
+監製：姚秀鈴
+張國強 飾 佟振保 	
+林友榮 飾 張千
+莫家駒 飾 李萬
+華夫 飾 佟篤保
+鄭啟明 飾 王士洪
+車森梅 飾 王嬌蕊 	
+朱曼子 飾 孟煙鸝 	
+丁茵 飾 振保母 	
+溫泉 飾 車伕 	
+譚翠蓮 飾 女傭
+曾永強 飾 工人/洋經理
+伍曼儀 飾 媽媽生/甲女
+姚秀鈐 飾 女秘書
+Jane 飾 妓女
+孔祥卿 飾 艾許太太
+張璧賢 飾 艾許小姐 	
+黃惠蓮 飾 餘媽
+楊吉璽 飾 心理醫生
+周偉才 飾 酒保
+鄭曦暉 飾 乙女
+</pre>
+</body>
+<script type="text/javascript">
+var audio;
+var playlist;
+var tracks;
+var current;
+if (document.readyState !== 'loading' ) {
+  eventHandler();
+} else {
+  document.addEventListener( 'DOMContentLoaded', eventHandler);  
+}  
+function eventHandler(){
+
+init();
+function init(){
+    audio = document.getElementById('audio');
+    playlist = document.getElementById('playlist');
+    FillPlaylist("7fwriters/rd_red_white_roses_",5, 0);	
+    current = playlist.firstElementChild;
+    tracks = playlist.querySelectorAll('a');
+    audio.volume = .10;
+    audio.play();
+    for (var link of tracks) {
+        link.addEventListener('click', function(e){ 
+        e.preventDefault();
+        var link = this;
+        current.classList.remove('active');
+        current = link.parentNode;
+        current.classList.add('active');
+        run(link, audio);
+        });
+    }
+    audio.addEventListener('ended',function(e){
+        current.classList.remove('active');
+        current= current.nextElementSibling;
+        if(current == null){
+            current = playlist.firstElementChild;
+        }
+        current.classList.add('active');
+        link = current.firstElementChild;
+        run(link,audio);
+    });
+}
+function run(link, player){
+        player.src = link.href;
+        audio.load();
+        audio.play();
+}
+function FillPlaylist(drama, len, pad) {
+    var i;
+    for (i=1; i<=len; i++) { 	
+       var div_ = document.createElement("DIV");
+       var a_ = document.createElement("A");
+       var episode = i.toString();	    
+       if (pad > 0) {
+	  episode = episode.padStart(pad, '0');
+       }       
+       a_.setAttribute("href", "http://rthk9.rthk.hk/radiodrama/mp3/"+ drama + episode + ".mp3");
+       var i_ = document.createTextNode(i.toString());
+       a_.appendChild(i_);
+       div_.appendChild(a_);
+       if (i == 1) {
+	  div_.setAttribute("class","active");     
+	  audio.firstElementChild.setAttribute("src", a_.attributes[0].value);     
+	  audio.load();     
+       }	       
+       playlist.appendChild(div_);
+    }	    
+}
+}	
+</script>
+</html>
