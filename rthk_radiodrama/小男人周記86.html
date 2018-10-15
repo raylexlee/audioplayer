@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>小男人周記86</title>
+<style>
+p , pre  {font-size: 20px;}    
+#audio{background:#666;width:94%;padding:20px;}
+.active a{color:#5DB0E6;text-dcoration:none;}
+div a{color:black;}
+div a:hover{text-decoration:none;}
+#playlist {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  background-color: green;
+  padding: 3px;
+}
+#playlist > div  {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid black;
+  padding: 4px;
+  text-align: center;
+  font-size: 20px;
+}
+</style>
+</head>
+<body>
+    <audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg">
+        <source type="audio/mp3" src="">
+        Sorry, your browser does not support HTML5 audio.
+    </audio>
+<div id="playlist">
+</div>
+<p>《小男人周記》曾是八十年代中期《青春交響曲》及《阿旦眼中的世界》中的環節，每星期播出一集，深受聽眾歡迎，之後更結集成小說出版。鄭丹瑞(阿旦)飾演的男主角阿寬，以獨白形式說出一周內圍繞他身邊發生的事情。故事編劇陳慶嘉以輕鬆幽默的手法，探討大都會小男人阿寬愛情、親情、友情及事業方面的發展。</p>
+<p>三十歲的阿寬，與女強人太太阿Ann結婚六年，某一天，阿Ann提出分居的要求。阿寬面對逐漸流逝的青春，決定再次捕捉浪漫，一方面與初戀情人Jenny共赴同居，另一方面卻又暗戀清純的Rosa，並發展出另一段感情關係。哪知阿Ann後來又希望能夠回到阿寬身邊。而阿寬被公司裁員，誤打誤撞下獲一跨國大企業聘為廣告部經理，誰知卻又捲入另一場辦公室政治鬥爭中。後來阿寬認識了林太、Dionne、韓小姐等紅顏知己，令他本已多姿多采的感情生活變得更為複雜，究竟阿寬最後情歸何處? </p>
+<p>廣播劇結束後的最後兩集，阿旦更請來車淑梅、鄧藹霖、何嘉麗等演譯五位劇中女角的內心表白，以及與編劇陳慶嘉一同討論創作歷程。</p>
+</body>
+<script type="text/javascript">
+var audio;
+var playlist;
+var tracks;
+var current;
+if (document.readyState !== 'loading' ) {
+  eventHandler();
+} else {
+  document.addEventListener( 'DOMContentLoaded', eventHandler);  
+}  
+function eventHandler(){
+
+init();
+function init(){
+    audio = document.getElementById('audio');
+    playlist = document.getElementById('playlist');
+    FillPlaylist("6contemperary/rd_mdiary_",20, 0);	
+    current = playlist.firstElementChild;
+    tracks = playlist.querySelectorAll('a');
+    audio.volume = .10;
+    audio.play();
+    for (var link of tracks) {
+        link.addEventListener('click', function(e){ 
+        e.preventDefault();
+        var link = this;
+        current.classList.remove('active');
+        current = link.parentNode;
+        current.classList.add('active');
+        run(link, audio);
+        });
+    }
+    audio.addEventListener('ended',function(e){
+        current.classList.remove('active');
+        current= current.nextElementSibling;
+        if(current == null){
+            current = playlist.firstElementChild;
+        }
+        current.classList.add('active');
+        link = current.firstElementChild;
+        run(link,audio);
+    });
+}
+function run(link, player){
+        player.src = link.href;
+        audio.load();
+        audio.play();
+}
+function FillPlaylist(drama, len, pad) {
+    var i;
+    for (i=1; i<=len; i++) { 	
+       var div_ = document.createElement("DIV");
+       var a_ = document.createElement("A");
+       var episode = i.toString();	    
+       if (pad > 0) {
+	  episode = episode.padStart(pad, '0');
+       }       
+       a_.setAttribute("href", "http://rthk9.rthk.hk/radiodrama/mp3/"+ drama + episode + ".mp3");
+       var i_ = document.createTextNode(i.toString());
+       a_.appendChild(i_);
+       div_.appendChild(a_);
+       if (i == 1) {
+	  div_.setAttribute("class","active");     
+	  audio.firstElementChild.setAttribute("src", a_.attributes[0].value);     
+	  audio.load();     
+       }	       
+       playlist.appendChild(div_);
+    }	    
+}
+}	
+</script>
+</html>
