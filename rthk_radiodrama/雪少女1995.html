@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>雪少女1995</title>
+<style>
+p , pre  {font-size: 20px;}    
+#audio{background:#666;width:94%;padding:20px;}
+.active a{color:#5DB0E6;text-dcoration:none;}
+div a{color:black;}
+div a:hover{text-decoration:none;}
+#playlist {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  background-color: green;
+  padding: 3px;
+}
+#playlist > div  {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid black;
+  padding: 4px;
+  text-align: center;
+  font-size: 20px;
+}
+</style>
+</head>
+<body>
+    <audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg">
+        <source type="audio/mp3" src="">
+        Sorry, your browser does not support HTML5 audio.
+    </audio>
+<div id="playlist">
+</div>
+<p>《香港故事》之《雪少女》，講述一對性格迴異的姊妹：姐姐徐瑋雅性格冷若冰霜，聰明能幹；妹妹徐安麗熱情如火，卻一直想要證明自己會過得比姐姐好；在一場殘酷的愛情中，瑋雅退出、埋首工作，卻有了意想不到的際遇…… 「雪少女」經改編後由陳慧嫻聲演徐瑋雅、曾月娥聲演徐安麗；翟耀輝聲演殷國桓，一開始用心追求瑋雅，卻受安麗的引誘而轉投其懷抱；另外亦有洪朝豐聲演富有男性魅力的谷岩，性格冷酷、與瑋雅在工作上常起衝突，卻在不知不覺下愛上了瑋雅。眾多角色由此上演一齣曲折起伏的愛情故事。 陳慧嫻除聲演女主角外，更以其甜美聲線演繹主題曲「飄」。
+</p>
+<pre>
+原著: 葉小嵐
+監製: 葉世雄
+編導: 楊麗仙
+編劇: 伊琳 
+陳慧嫻 飾 徐瑋雅			
+曾月娥 飾 徐安麗	
+林友榮 飾 經理			
+莫家駒 飾 老板
+錢佩佩 飾 魏丹			
+朱曼子 飾 眾同學
+洪朝豐 飾 谷岩			
+黎家希 飾 眾同學
+吳忠泰 飾 男同學			
+翟耀輝 飾 殷國桓
+曾月娥 飾 徐安麗				
+黎家希 飾 桑大志	
+</pre>
+</body>
+<script type="text/javascript">
+var audio;
+var playlist;
+var tracks;
+var current;
+if (document.readyState !== 'loading' ) {
+  eventHandler();
+} else {
+  document.addEventListener( 'DOMContentLoaded', eventHandler);  
+}  
+function eventHandler(){
+
+init();
+function init(){
+    audio = document.getElementById('audio');
+    playlist = document.getElementById('playlist');
+    FillPlaylist("6contemperary/snow",5, 2);	
+    current = playlist.firstElementChild;
+    tracks = playlist.querySelectorAll('a');
+    audio.volume = .10;
+    audio.play();
+    for (var link of tracks) {
+        link.addEventListener('click', function(e){ 
+        e.preventDefault();
+        var link = this;
+        current.classList.remove('active');
+        current = link.parentNode;
+        current.classList.add('active');
+        run(link, audio);
+        });
+    }
+    audio.addEventListener('ended',function(e){
+        current.classList.remove('active');
+        current= current.nextElementSibling;
+        if(current == null){
+            current = playlist.firstElementChild;
+        }
+        current.classList.add('active');
+        link = current.firstElementChild;
+        run(link,audio);
+    });
+}
+function run(link, player){
+        player.src = link.href;
+        audio.load();
+        audio.play();
+}
+function FillPlaylist(drama, len, pad) {
+    var i;
+    for (i=1; i<=len; i++) { 	
+       var div_ = document.createElement("DIV");
+       var a_ = document.createElement("A");
+       var episode = i.toString();	    
+       if (pad > 0) {
+	  episode = episode.padStart(pad, '0');
+       }       
+       a_.setAttribute("href", "http://rthk9.rthk.hk/radiodrama/mp3/"+ drama + episode + ".mp3");
+       var i_ = document.createTextNode(i.toString());
+       a_.appendChild(i_);
+       div_.appendChild(a_);
+       if (i == 1) {
+	  div_.setAttribute("class","active");     
+	  audio.firstElementChild.setAttribute("src", a_.attributes[0].value);     
+	  audio.load();     
+       }	       
+       playlist.appendChild(div_);
+    }	    
+}
+}	
+</script>
+</html>
