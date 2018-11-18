@@ -43,10 +43,13 @@ var playlist;
 var tracks;
 var current;
 var activeEpisode;
+var currentTime;
 if (!localStorage.getItem('activeEpisode')) {
     activeEpisode = "1";
+    currentTime = 0.0
 } else {
     activeEpisode = localStorage.getItem('activeEpisode');
+    currentTime = localStorage.getItem('currentTime');
 }
 if (document.readyState !== 'loading' ) {
   eventHandler();
@@ -64,6 +67,7 @@ function init(){
     tracks = playlist.querySelectorAll('a');
     audio.volume = .10;
     audio.play();
+    audio.currentTime = currentTime;
     for (var link of tracks) {
         link.addEventListener('click', function(e){ 
         e.preventDefault();
@@ -71,6 +75,8 @@ function init(){
         current.classList.remove('active');
         current = link.parentNode;
         current.classList.add('active');
+        currentTime = 0.0;
+        localStorage.setItem('currentTime', 0.0);
         run(link, audio);
         });
     }
@@ -82,7 +88,12 @@ function init(){
         }
         current.classList.add('active');
         link = current.firstElementChild;
+        currentTime = 0.0;
+        localStorage.setItem('currentTime', 0.0);
         run(link,audio);
+    });
+    audio.addEventListener('pause',function(e){
+        localStorage.setItem('currentTime', audio.currentTime);
     });
 }
 function run(link, player){
@@ -90,6 +101,7 @@ function run(link, player){
         localStorage.setItem('activeEpisode', link.innerHTML);
         audio.load();
         audio.play();
+        audio.currentTime = currentTime;
 }
 function FillPlaylist(drama, len, pad) {
     var i;
