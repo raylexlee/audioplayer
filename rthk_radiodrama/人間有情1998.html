@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title></title>
+    <title>人間有情1998</title>
 <style>
 p , pre  {font-size: 20px;}    
 #audio{background:#666;width:94%;padding:20px;}
@@ -13,7 +13,7 @@ div a{color:black;}
 div a:hover{text-decoration:none;}
 #playlist {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   background-color: green;
   padding: 3px;
 }
@@ -33,9 +33,12 @@ div a:hover{text-decoration:none;}
     </audio>
 <div id="playlist">
 </div>
-<p></p>
+<p>《十一點半午夜場》之《人間有情》，講述梁蘇記遮廠植根於中國大陸，因逃避戰爭而移至香港及澳門發展，終敵不住時代的轉變而被淘汰。遮廠歷時整整一世紀，見證了香港發展和變化……
+</p>
 <pre>
-</pre>
+編劇：杜國威  
+監製：姚秀鈴
+春天舞臺全體演出</pre>
 </body>
 <script type="text/javascript">
 var audio;
@@ -61,7 +64,7 @@ init();
 function init(){
     audio = document.getElementById('audio');
     playlist = document.getElementById('playlist');
-    FillPlaylist("5martial/2000s_0008_",100, 3);	
+    FillPlaylist("6contemperary/rd_love_",5, 0);	
     current = playlist.firstElementChild;
     tracks = playlist.querySelectorAll('a');
     audio.volume = .10;
