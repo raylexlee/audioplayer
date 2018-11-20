@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>書劍恩仇錄1999</title>
+<style>
+p , pre  {font-size: 20px;}    
+#audio{background:#666;width:94%;padding:20px;}
+.active a{color:#5DB0E6;text-decoration:none;}
+div a{color:black;}
+div a:hover{text-decoration:none;}
+#playlist {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  background-color: green;
+  padding: 3px;
+}
+#playlist > div  {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid black;
+  padding: 4px;
+  text-align: center;
+  font-size: 20px;
+}
+</style>
+</head>
+<body>
+    <audio id="audio" preload="auto" tabindex="0" controls="" type="audio/mpeg">
+        <source type="audio/mp3" src="">
+        Sorry, your browser does not support HTML5 audio.
+    </audio>
+<div id="playlist">
+</div>
+<p>《書劍恩仇錄》是金庸第一部武俠小說，講述中國清朝乾隆年間，民間反清復明組織「紅花會」與朝廷抗爭的故事，本故事採用了「乾隆是漢人」的傳說，借乾隆這個人物，寫出了既得權力和民族仇恨之間的矛盾。
+《書劍恩仇錄》廣播劇於1999年製作，在《十一點半午夜場》節目時段內播出，由謝君豪及梁詠琪分別飾演乾隆及香香公主。主題曲「書中劍影」，由杜雯惠作曲、填詞及主唱。</p>
+<pre>
+謝君豪 – 乾隆 	
+梁詠琪 – 香香公主 	
+周國豐 – 陳家洛/福康安 	
+彭晴 – 霍青桐
+王祖藍 – 心硯 	
+葉蘊怡 – 李沅芷 	
+莫家駒 – 常伯志 	
+龍天生 – 常赫志
+丁家湘 – 張召重 	
+熊良錫 – 文泰來 	
+朱曼子 – 駱冰 	
+蔡浩樑 – 余魚同
+翟耀輝 – 徐天宏 	
+車森梅 – 周綺 	
+鍾一鳴 – 陸菲青 	
+華夫 – 衛春華
+余世騰 – 無塵道人
+</pre>
+<p>
+其他參與演員：
+施介強、曾永強、戴偉光、李健良、陳炳球、劉雪明、盧洪、葉偉麟、何國雄、吳中泰、譚漢華、溫泉、謝月美、傅菁韋、吳忠泰、阮德鏘等。
+本劇由姚秀鈴監製、曾月娥編導、陳七編劇。</p>
+</body>
+<script type="text/javascript">
+var audio;
+var playlist;
+var tracks;
+var current;
+var activeEpisode;
+var currentTime;
+if (!localStorage.getItem('activeEpisode')) {
+    localStorage.setItem('activeEpisode', "1");
+    localStorage.setItem('currentTime', 0.0);
+}
+activeEpisode = localStorage.getItem('activeEpisode');
+currentTime = localStorage.getItem('currentTime');
+if (document.readyState !== 'loading' ) {
+  eventHandler();
+} else {
+  document.addEventListener( 'DOMContentLoaded', eventHandler);  
+}  
+function eventHandler(){
+
+init();
+function init(){
+    audio = document.getElementById('audio');
+    playlist = document.getElementById('playlist');
+    FillPlaylist("5martial/90s_0014_",32, 0);	
+    current = playlist.firstElementChild;
+    tracks = playlist.querySelectorAll('a');
+    audio.volume = .10;
+    audio.play();
+    audio.currentTime = currentTime;
+    for (var link of tracks) {
+        link.addEventListener('click', function(e){ 
+        e.preventDefault();
+        var link = this;
+        current.classList.remove('active');
+        current = link.parentNode;
+        current.classList.add('active');
+        currentTime = 0.0;
+        localStorage.setItem('currentTime', 0.0);
+        run(link, audio);
+        });
+    }
+    audio.addEventListener('ended',function(e){
+        current.classList.remove('active');
+        current= current.nextElementSibling;
+        if(current == null){
+            current = playlist.firstElementChild;
+        }
+        current.classList.add('active');
+        link = current.firstElementChild;
+        currentTime = 0.0;
+        localStorage.setItem('currentTime', 0.0);
+        run(link,audio);
+    });
+    audio.addEventListener('pause',function(e){
+        localStorage.setItem('currentTime', audio.currentTime);
+    });
+}
+function run(link, player){
+        player.src = link.href;
+        localStorage.setItem('activeEpisode', link.innerHTML);
+        audio.load();
+        audio.play();
+        audio.currentTime = currentTime;
+}
+function FillPlaylist(drama, len, pad) {
+    var i;
+    for (i=1; i<=len; i++) { 	
+       var div_ = document.createElement("DIV");
+       var a_ = document.createElement("A");
+       var episode = i.toString();	    
+       if (pad > 0) {
+	  episode = episode.padStart(pad, '0');
+       }       
+       a_.setAttribute("href", "http://rthk9.rthk.hk/radiodrama/mp3/"+ drama + episode + ".mp3");
+       var i_ = document.createTextNode(i.toString());
+       a_.appendChild(i_);
+       div_.appendChild(a_);
+       if (i.toString() == activeEpisode) {
+	  div_.setAttribute("class","active");     
+	  audio.firstElementChild.setAttribute("src", a_.attributes[0].value);     
+	  audio.load();     
+       }	       
+       playlist.appendChild(div_);
+    }	    
+}
+}	
+</script>
+</html>
