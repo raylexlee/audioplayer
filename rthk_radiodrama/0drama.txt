@@ -1,0 +1,12 @@
+廿年2017.html,20yrs_story,10, 2
+三浦綾子之冰點.html,1classics/icepoint/,39, 2
+傾城之戀1994.html,7fwriters/loveinfall/,10, 2
+天外金球.html,11wesley/wesley_spaceball,15, 2
+沈勝衣之雙龍會.html,4tales/rd_dragon_,9, 0
+流金歲月1988.html,7fwriters/yishu_golden,15, 2
+獅子山下2006.html,6contemperary/rd_lionrock_,20, 0
+連城訣.html,5martial/80s_0022,25, 4
+金瓶梅1999.html,1classics/rd_jpm_,35, 0
+陌上歸人.html,7fwriters/rd_return_,20, 0
+雍正皇帝.html,1classics/king,75, 2
+雪山飛狐.html,5martial/80s_0032_,15, 0

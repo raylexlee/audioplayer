@@ -1,0 +1,7 @@
+#!/bin/bash
+sed -n -E ' 
+/^<p>/,/^<\/body/ {
+    /^<\/body>/ d
+    p
+}
+'
