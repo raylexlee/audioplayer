@@ -1,5 +1,0 @@
-#!/bin/bash
-sed -n -E ' 
-   s/:\w*FillPlaylist\(/,/
-   p
-'

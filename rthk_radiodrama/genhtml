@@ -1,0 +1,4 @@
+#!/bin/bash
+./gen_head $1 > pub/$1.html
+./sed_about < $1.html >> pub/$1.html
+./gen_obj $2 $3 $4 >> pub/$1.html

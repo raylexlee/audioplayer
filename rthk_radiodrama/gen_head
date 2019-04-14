@@ -1,0 +1,20 @@
+#!/bin/bash
+echo \<!DOCTYPE html\>
+echo \<html lang=\"en\"\>
+echo \<head\>
+echo     \<meta charset=\"UTF-8\"\>
+echo     \<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"\>
+echo     \<meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\"\>
+echo     \<meta name=\"apple-mobile-web-app-capable\" content=\"yes\"\>
+echo     \<meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black\"\>
+echo     \<meta name=\"apple-mobile-web-app-title\" content=\"$1\"\>
+echo     \<title\>$1\</title\>
+echo     \<link rel=\"stylesheet\" href=\"style.css\"\>
+echo \</head\>
+echo \<body\>
+echo     \<audio id=\"audio\" preload=\"auto\" tabindex=\"0\" controls=\"\" type=\"audio/mpeg\"\>
+echo         \<source type=\"audio/mp3\" src=\"\"\>
+echo         Sorry, your browser does not support HTML5 audio.
+echo     \</audio\>
+echo \<div id=\"playlist\"\>
+echo \</div\>
