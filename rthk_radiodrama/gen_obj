@@ -1,4 +1,5 @@
 #!/bin/bash
+echo \<a href=\"index.html\"\>回到目錄\</a\>
 echo \<script type=\"text/javascript\"\>
 echo var radiodrama = {
 echo     program_infix: \"$1\",
